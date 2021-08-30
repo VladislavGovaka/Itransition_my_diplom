@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/registrCss.css">
+    <link rel="stylesheet" href="/static/css/table.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+</head>
+<body>
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-xxl">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+                    aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <h4 class="navbar-brand">Welcome...
+                    <h4 th:if="${isAuthentication}" th:text="${user.getUsername()}"></h4></h4>
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/main}">Main</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button style="background: #a55da8" class="btn btn-primary btn-block" type="submit">Search</button>
+                </form>
+                <form class="d-flex" th:action="@{/logout}" method="post">
+                    <button style="background: #a55da8" class="btn btn-primary btn-block" type="submit">Log Out</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="intro" id="intro">
+    <br>
+
+    <div class="container mtd-3" style="background: white">
+        <table class="table">
+            <thead>
+
+            <tr>
+                <th>Id</th>
+                <th>Data</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Change Role</th>
+                <th>Delete User</th>
+
+            </tr>
+            </thead>
+            </tbody>
+            <div th:each="user : ${isUsers}">
+
+                <tr>
+                    <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getDataRegistration()}"></td>
+                    <td th:text="${user.getUsername()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td th:text="${user.getRoles()}"></td>
+
+                    <td>
+                        <form class="form" th:action="@{/admin}" method="post">
+                            <input type="hidden" name="id" th:value="${user.getId()}">
+                            <button style="background: #a55da8" class="btn btn-primary btn-block"
+                                    type="submit" name="action" value="setAdmin">Change
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form class="form" th:action="@{/admin}" method="post">
+                            <input type="hidden" name="id" th:value="${user.getId()}">
+                            <button style="background: #a55da8" class="btn btn-primary btn-block"
+                                    type="submit" name="action" value="deleteUser">Delete
+                            </button>
+                        </form>
+
+
+                    </td>
+                </tr>
+            </div>
+        </table>
+    </div>
+
+
+</div>
+
+<script th:src="@{/static/js/three.min.js}"></script>
+<script th:src="@{/static/js/vanta.birds.min.js}"></script>
+<script th:src="@{/static/js/app.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

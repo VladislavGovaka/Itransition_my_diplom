@@ -60,6 +60,7 @@ public class MainController {
         System.out.printf("");
         System.out.printf("");
         System.out.printf("");
+        System.out.printf("");
 
         listItem = itemService.searchItems(key);
         return "redirect:/main";

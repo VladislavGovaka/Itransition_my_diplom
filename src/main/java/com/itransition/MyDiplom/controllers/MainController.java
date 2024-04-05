@@ -51,6 +51,7 @@ public class MainController {
     @PostMapping(value = "/main", params = "action=search")
     public String showItem(@RequestParam("searchKey") String key) {
 
+        System.out.printf("asfasfsfa");
         if (key.equals("")) {
             flagSearch = false;
 

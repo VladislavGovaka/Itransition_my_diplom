@@ -58,6 +58,7 @@ public class MainController {
         }
         flagSearch = true;
         System.out.printf("");
+        System.out.printf("");
 
         listItem = itemService.searchItems(key);
         return "redirect:/main";
